@@ -13,6 +13,7 @@ scores = [0,0];
 activePlayer = 0;
 document.querySelector('#score-'+activePlayer).textContent = '0';
 document.querySelector('#score-1').textContent = '0';
+document.querySelector('#current-'+activePlayer).textContent = '0';
 
 
 
