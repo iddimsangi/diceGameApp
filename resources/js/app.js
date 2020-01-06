@@ -17,8 +17,11 @@ document.querySelector('#current-'+activePlayer).textContent = '0';
 document.querySelector('.dice').style.display = 'none';
 
 document.querySelector('.btn-roll').addEventListener('click',function(){
+dice = Math.floor(Math.random()*6) + 1;
+document.querySelector('.dice').style.display = 'block';
+document.querySelector('.dice').src = 'resources/img/dice-'+dice+'.png';
 
-})
+});
 
 
 
