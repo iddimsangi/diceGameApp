@@ -42,6 +42,20 @@ function nextPlayer(){
     document.querySelector('.player-1-panel').classList.toggle('active');
 }
 
+document.querySelector('.btn-hold').addEventListener('click',function(){
+    scores[activePlayer] += roundScore;
+    document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
+
+    document.getElementById('current-'+activePlayer).textContent = '0';
+    if(scores[activePlayer] > 25){
+        document.querySelector('.player-'+activePlayer+'-panel').classList.remove('active');
+        document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
+        document.querySelector('#name-'+activePlayer).textContent = 'WINNER';
+    }else{
+        nextPlayer();
+    }
+})
+
 
 
 
