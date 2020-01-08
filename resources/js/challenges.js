@@ -9,7 +9,7 @@ GAME RULES:
 */
 var scores,roundScore,activePlayer,dice,gamePlaying;
 init();
-
+var lastDiceVal;
 document.querySelector('.btn-roll').addEventListener('click',function(){
     if(gamePlaying){
         dice = Math.floor(Math.random()*6) + 1;
@@ -27,7 +27,11 @@ document.querySelector('.btn-roll').addEventListener('click',function(){
 
 });
 function nextPlayer(){
-    if(gamePlaying){
+    if(dice === 6 && lastDiceVal === 6){
+        scores[activePlayer] = 0;
+        document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
+   nextPlayer();
+    }else if(gamePlaying){
         activePlayer === 0 ? activePlayer = 1:activePlayer = 0;
         roundScore = 0;
     
@@ -42,12 +46,21 @@ function nextPlayer(){
 }
 
 document.querySelector('.btn-hold').addEventListener('click',function(){
+    var input,defaultScore;
     if(gamePlaying){
         scores[activePlayer] += roundScore;
         document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
     
         document.getElementById('current-'+activePlayer).textContent = '0';
-        if(scores[activePlayer] > 25){
+         input = document.querySelector('.final-score').value;
+         
+        //remember the faulsy values concept
+        if(input){
+             defaultScore = input;
+        }else{
+             defaultScore = 25;
+        }
+        if(scores[activePlayer] > defaultScore){
             document.querySelector('.player-'+activePlayer+'-panel').classList.remove('active');
             document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
             document.querySelector('#name-'+activePlayer).textContent = 'WINNER';
@@ -58,7 +71,7 @@ document.querySelector('.btn-hold').addEventListener('click',function(){
         }
     }
    
-})
+});
 document.querySelector('.btn-new').addEventListener('click',init);
 function init(){
     scores = [0,0];
